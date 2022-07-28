@@ -4,43 +4,39 @@
 ## AnyKernel setup
 # begin properties
 properties() { '
-kernel.string=Spectrum Kernel by Edgars Cirulis.
-do.devicecheck=1
+kernel.string=Spectrum Kernel For Oneplus SM8250 Series.
+do.devicecheck=0
 do.modules=0
-do.systemless=1
+do.systemless=0
 do.cleanup=1
 do.cleanuponabort=0
-device.name1=miatoll
-device.name2=excalibur
-device.name3=curtana
-device.name4=gram
-device.name5=joyeuse
-supported.versions=11.0-12.0
+device.name1=
+device.name2=
+device.name3=
+device.name4=
+device.name5=
+supported.versions=
 supported.patchlevels=
 '; } # end properties
 
 # shell variables
-block=/dev/block/bootdevice/by-name/boot;
-is_slot_device=auto;
+block=boot;
+is_slot_device=1;
 ramdisk_compression=auto;
 patch_vbmeta_flag=auto;
-
 
 ## AnyKernel methods (DO NOT CHANGE)
 # import patching functions/variables - see for reference
 . tools/ak3-core.sh;
-
 
 ## AnyKernel file attributes
 # set permissions/ownership for included ramdisk files
 set_perm_recursive 0 0 755 644 $ramdisk/*;
 set_perm_recursive 0 0 750 750 $ramdisk/init* $ramdisk/sbin;
 
-
 ## AnyKernel boot install
-split_boot;
+dump_boot;
 
-flash_boot;
-flash_dtbo;
+write_boot;
 ## end boot install
 
